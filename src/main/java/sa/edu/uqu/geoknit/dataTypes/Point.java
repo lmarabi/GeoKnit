@@ -1,4 +1,4 @@
-package sa.edu.uqu.geoknit.dataTypesOsa;
+package sa.edu.uqu.geoknit.dataTypes;
 
 /***********************************************************************
  * Copyright (c) 2015 by Regents of the University of Minnesota.
