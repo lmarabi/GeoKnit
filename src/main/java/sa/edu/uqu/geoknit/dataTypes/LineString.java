@@ -1,10 +1,10 @@
-package sa.edu.uqu.geoknit.dataTypesOsa;
+package sa.edu.uqu.geoknit.dataTypes;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<LineString> {
+public class LineString implements sa.edu.uqu.geoknit.dataTypes.Shape, Comparable<LineString> {
     public double x1;
     public double y1;
     public double x2;
@@ -30,7 +30,7 @@ public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Compar
      * A copy constructor from any shape of type Point (or subclass of Point)
      * @param s1 ,s2
      */
-    public LineString(sa.edu.uqu.geoknit.dataTypesOsa.Point s1 , Point s2) {
+    public LineString(sa.edu.uqu.geoknit.dataTypes.Point s1 , Point s2) {
         this.x1 = s1.x;
         this.y1 = s1.y;
         this.x2 = s2.x;
@@ -61,7 +61,7 @@ public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Compar
 //        this.y = in.readDouble();
 //    }
 
-    public int compareTo(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public int compareTo(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         LineString pt2 = (LineString) s;
 
         // Sort by id
@@ -106,7 +106,7 @@ public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Compar
     }
 
     @Override
-    public void draw(Graphics g, sa.edu.uqu.geoknit.dataTypesOsa.Rectangle fileMBR, int imageWidth, int imageHeight, double scale) {
+    public void draw(Graphics g, sa.edu.uqu.geoknit.dataTypes.Rectangle fileMBR, int imageWidth, int imageHeight, double scale) {
 
     }
 
@@ -126,7 +126,7 @@ public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Compar
     /**
      * Returns the minimal bounding rectangle of this point. This method returns
      * the smallest rectangle that contains this point. For consistency with
-     * other methods such as {@link sa.edu.uqu.geoknit.dataTypesOsa.Rectangle#isIntersected(sa.edu.uqu.geoknit.dataTypesOsa.Shape)}, the rectangle
+     * other methods such as {@link sa.edu.uqu.geoknit.dataTypes.Rectangle#isIntersected(sa.edu.uqu.geoknit.dataTypes.Shape)}, the rectangle
      * cannot have a zero width or height. Thus, we use the method
      * {@link Math#ulp(double)} to compute the smallest non-zero rectangle that
      * contains this point. In other words, for a point <code>p</code> the
@@ -136,7 +136,7 @@ public class LineString implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Compar
 
     // not ready
     @Override
-    public sa.edu.uqu.geoknit.dataTypesOsa.Rectangle getMBR() {
+    public sa.edu.uqu.geoknit.dataTypes.Rectangle getMBR() {
         return new Rectangle(x1, y1, x1 + Math.ulp(x1), y1 + Math.ulp(y1));
     }
     // not ready

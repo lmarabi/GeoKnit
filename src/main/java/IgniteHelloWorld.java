@@ -1,10 +1,10 @@
-import sa.edu.uqu.geoknit.dataTypesOsa.City;
+import sa.edu.uqu.geoknit.dataTypes.City;
 //import jdk.nashorn.internal.pars  ccxvvx'lk;\gjhASDF
 // ]
 //
 // er.JSONParser;
-import sa.edu.uqu.geoknit.dataTypesOsa.LineString;
-import sa.edu.uqu.geoknit.dataTypesOsa.Point;
+import sa.edu.uqu.geoknit.dataTypes.LineString;
+import sa.edu.uqu.geoknit.dataTypes.Point;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
@@ -20,12 +20,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import sa.edu.uqu.geoknit.dataTypesOsa.Polygon;
+import sa.edu.uqu.geoknit.dataTypes.Polygon;
 
 import javax.cache.Cache;
 
 public class IgniteHelloWorld {
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
 
 
     public static void main(String[] args) throws ParseException {
@@ -69,10 +69,12 @@ public class IgniteHelloWorld {
 //        IgniteCache<Integer, String> cache = ignite.getOrCreateCache("myCache");
 //        cache.put(1, "Hello");
 //        cache.put(2, "World!");
-//        cache.put(3, "2020");
-        cityList.forEach(
-                city -> getCity( (JSONObject) city  , cache)
-        );
+        cache.put(3l, new City(3l));
+        System.out.println( cache.get(3l).region_id );
+
+//        cityList.forEach(
+//                city -> getCity( (JSONObject) city  , cache)
+//        );
         System.out.println(">> Created the cache and add the values.");
 
         // Executing custom Java compute task on server nodes.
@@ -91,8 +93,8 @@ public class IgniteHelloWorld {
      * Plus, the code shows how to access data stored in a cache from the compute task.
      */
     private static class RemoteTask implements IgniteRunnable {
-        @IgniteInstanceResource
-        Ignite ignite;
+//        @IgniteInstanceResource
+        Ignite ignite ;
 
         public void run() {
             System.out.println(">> Executing the compute task");
@@ -103,7 +105,7 @@ public class IgniteHelloWorld {
                             "   JRE: " + System.getProperty("java.runtime.name"));
 
             IgniteCache<Long, City> cache = ignite.cache("myCache");
-            testClasses();
+//            testClasses();
 //            IgniteCache<Integer, String> cache = ignite.cache("myCache");
 
 //            Iterable<City> iter  = findAll(cache);
@@ -124,7 +126,7 @@ public class IgniteHelloWorld {
 //                System.out.println(ent.getKey().toString() );
 //            }
             System.out.println("cache size "+cache.size() );
-//            System.out.println( cache.get(1l) );
+            System.out.println( cache.get(3l).region_id );
 //            for (int i = 0; i < cache.size()/4; i++) {
 //                if (cache.get((long) i) != null ) {
 //                            System.out.println(cache.get((long) i).toString( ));

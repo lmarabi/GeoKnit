@@ -1,4 +1,4 @@
-package sa.edu.uqu.geoknit.dataTypesOsa;
+package sa.edu.uqu.geoknit.dataTypes;
 
 /***********************************************************************
  * Copyright (c) 2015 by Regents of the University of Minnesota.
@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 
-import sa.edu.uqu.geoknit.dataTypesOsa.*;
+import sa.edu.uqu.geoknit.dataTypes.*;
 
 
 /**
@@ -21,7 +21,7 @@ import sa.edu.uqu.geoknit.dataTypesOsa.*;
  * @author eldawy
  *
  */
-public class Polygon extends java.awt.Polygon implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
+public class Polygon extends java.awt.Polygon implements sa.edu.uqu.geoknit.dataTypes.Shape {
 
     private static final long serialVersionUID = -117491486038680078L;
 

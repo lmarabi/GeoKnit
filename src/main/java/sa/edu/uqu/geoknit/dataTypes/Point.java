@@ -18,7 +18,7 @@ import java.util.Arrays;
  * @author Osamah
  *
  */
-public class Point implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<Point> {
+public class Point implements sa.edu.uqu.geoknit.dataTypes.Shape, Comparable<Point> {
     public double x;
     public double y;
 
@@ -69,7 +69,7 @@ public class Point implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<
 //        this.y = in.readDouble();
 //    }
 
-    public int compareTo(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public int compareTo(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         Point pt2 = (Point) s;
 
         // Sort by id
@@ -115,7 +115,7 @@ public class Point implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<
     /**
      * Returns the minimal bounding rectangle of this point. This method returns
      * the smallest rectangle that contains this point. For consistency with
-     * other methods such as {@link sa.edu.uqu.geoknit.dataTypesOsa.Rectangle#isIntersected(sa.edu.uqu.geoknit.dataTypesOsa.Shape)}, the rectangle
+     * other methods such as {@link sa.edu.uqu.geoknit.dataTypes.Rectangle#isIntersected(sa.edu.uqu.geoknit.dataTypes.Shape)}, the rectangle
      * cannot have a zero width or height. Thus, we use the method
      * {@link Math#ulp(double)} to compute the smallest non-zero rectangle that
      * contains this point. In other words, for a point <code>p</code> the
@@ -123,8 +123,8 @@ public class Point implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<
      * <code>p.getMBR().isIntersected(p);</code>
      */
     @Override
-    public sa.edu.uqu.geoknit.dataTypesOsa.Rectangle getMBR() {
-        return new sa.edu.uqu.geoknit.dataTypesOsa.Rectangle(x, y, x + Math.ulp(x), y + Math.ulp(y));
+    public sa.edu.uqu.geoknit.dataTypes.Rectangle getMBR() {
+        return new sa.edu.uqu.geoknit.dataTypes.Rectangle(x, y, x + Math.ulp(x), y + Math.ulp(y));
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Point implements sa.edu.uqu.geoknit.dataTypesOsa.Shape, Comparable<
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public sa.edu.uqu.geoknit.dataTypesOsa.Shape getIntersection(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public sa.edu.uqu.geoknit.dataTypes.Shape getIntersection(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         return getMBR().getIntersection(s);
     }
 

@@ -1,4 +1,4 @@
-package sa.edu.uqu.geoknit.dataTypesOsa;
+package sa.edu.uqu.geoknit.dataTypes;
 
 /***********************************************************************
  * Copyright (c) 2015 by Regents of the University of Minnesota.
@@ -22,7 +22,7 @@ import java.io.IOException;
  * @author Ahmed Eldawy
  *
  */
-public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
+public class Rectangle implements sa.edu.uqu.geoknit.dataTypes.Shape {
     public double x1;
     public double y1;
     public double x2;
@@ -47,7 +47,7 @@ public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
         this.set(x1, y1, x2, y2);
     }
 
-    public void set(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public void set(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         if (s == null) {
             System.out.println("tozz");
             return;
@@ -82,7 +82,7 @@ public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
      * &lt; x1, y1, x2, y2&gt;
      * @return interger value
      */
-    public int compareTo(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public int compareTo(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         Rectangle rect2 = (Rectangle) s;
         // Sort by x1 then y1
         if (this.x1 < rect2.x1)
@@ -179,7 +179,7 @@ public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
         return new Rectangle(this);
     }
 
-    public boolean isIntersected(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public boolean isIntersected(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         if (s instanceof Point) {
             Point pt = (Point)s;
             return pt.x >= x1 && pt.x < x2 && pt.y >= y1 && pt.y < y2;
@@ -190,7 +190,7 @@ public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
         return (this.x2 > r.x1 && r.x2 > this.x1 && this.y2 > r.y1 && r.y2 > this.y1);
     }
 
-    public Rectangle getIntersection(sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public Rectangle getIntersection(sa.edu.uqu.geoknit.dataTypes.Shape s) {
         if (!s.isIntersected(this))
             return null;
         Rectangle r = s.getMBR();
@@ -213,7 +213,7 @@ public class Rectangle implements sa.edu.uqu.geoknit.dataTypesOsa.Shape {
         return contains(r.x1, r.y1, r.x2, r.y2);
     }
 
-    public Rectangle union(final sa.edu.uqu.geoknit.dataTypesOsa.Shape s) {
+    public Rectangle union(final sa.edu.uqu.geoknit.dataTypes.Shape s) {
         Rectangle r = s.getMBR();
         double ux1 = Math.min(x1, r.x1);
         double ux2 = Math.max(x2, r.x2);

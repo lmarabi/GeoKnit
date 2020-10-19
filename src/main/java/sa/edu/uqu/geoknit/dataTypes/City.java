@@ -1,4 +1,4 @@
-package sa.edu.uqu.geoknit.dataTypesOsa;
+package sa.edu.uqu.geoknit.dataTypes;
 
 public class City extends  Point {
 
@@ -9,6 +9,63 @@ public class City extends  Point {
     public Polygon boundariesP;
     public String boundaries;
 
+    public City(){ }
+
+    public City(Long l){ this.region_id= l;}
+
+    public City(Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
+        this.city_id = city_id;
+        this.region_id = region_id;
+        this.name_ar = name_ar;
+        this.name_en = name_en;
+        this.center = center;
+        this.boundariesP = boundariesP;
+        this.boundaries = boundaries;
+    }
+
+    public City(double x, double y, Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
+        super(x, y);
+        this.city_id = city_id;
+        this.region_id = region_id;
+        this.name_ar = name_ar;
+        this.name_en = name_en;
+        this.center = center;
+        this.boundariesP = boundariesP;
+        this.boundaries = boundaries;
+    }
+
+    public City(double[] point, Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
+        super(point);
+        this.city_id = city_id;
+        this.region_id = region_id;
+        this.name_ar = name_ar;
+        this.name_en = name_en;
+        this.center = center;
+        this.boundariesP = boundariesP;
+        this.boundaries = boundaries;
+    }
+
+    public City(Point s, Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
+        super(s);
+        this.city_id = city_id;
+        this.region_id = region_id;
+        this.name_ar = name_ar;
+        this.name_en = name_en;
+        this.center = center;
+        this.boundariesP = boundariesP;
+        this.boundaries = boundaries;
+    }
+
+    public City(String s, Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
+        super(s);
+        this.city_id = city_id;
+        this.region_id = region_id;
+        this.name_ar = name_ar;
+        this.name_en = name_en;
+        this.center = center;
+        this.boundariesP = boundariesP;
+        this.boundaries = boundaries;
+    }
 
     public Long getCity_id() {
         return city_id;

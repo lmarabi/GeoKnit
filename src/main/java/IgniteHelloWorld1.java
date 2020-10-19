@@ -2,12 +2,12 @@ import org.apache.ignite.IgniteFileSystem;
 import org.apache.ignite.configuration.FileSystemConfiguration;
 import org.apache.ignite.igfs.IgfsInputStream;
 import org.apache.ignite.igfs.IgfsPath;
-import sa.edu.uqu.geoknit.dataTypesOsa.City;
+import sa.edu.uqu.geoknit.dataTypes.City;
 //import jdk.nashorn.internal.pars  ccxvvx'lk;\gjhASDF
 // ]
 //
 // er.JSONParser;
-import sa.edu.uqu.geoknit.dataTypesOsa.Point;
+import sa.edu.uqu.geoknit.dataTypes.Point;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
