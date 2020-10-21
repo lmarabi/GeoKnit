@@ -10,6 +10,7 @@ package sa.edu.uqu.geoknit.dataTypes;
  *************************************************************************/
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Arrays;
 
 
@@ -18,9 +19,10 @@ import java.util.Arrays;
  * @author Osamah
  *
  */
-public class Point implements sa.edu.uqu.geoknit.dataTypes.Shape, Comparable<Point> {
+public class Point implements sa.edu.uqu.geoknit.dataTypes.Shape,  Serializable {
     public double x;
     public double y;
+    private static final long serialVersionUID = 7637475897498237502L;
 
     public Point() {
         this(0, 0);
@@ -169,7 +171,7 @@ public class Point implements sa.edu.uqu.geoknit.dataTypes.Shape, Comparable<Poi
         return pointDouble;
     }
 
-    @Override
+//    @Override
     public int compareTo(Point o) {
         if (x < o.x)
             return -1;

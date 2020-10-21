@@ -1,64 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress MavenModelInspection -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<s:project xmlns:s="http://maven.apache.org/POM/4.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <s:modelVersion>4.0.0</s:modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>IgnitTest</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>7</source>
-                    <target>7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <properties>
-        <ignite.version>2.8.1</ignite.version>
-    </properties>
+    <s:groupId>org.example</s:groupId>
+    <s:artifactId>IgnitTest</s:artifactId>
+    <s:version>1.0-SNAPSHOT</s:version>
+    <s:build>
+        <s:plugins>
+            <s:plugin>
+                <s:groupId>org.apache.maven.plugins</s:groupId>
+                <s:artifactId>maven-compiler-plugin</s:artifactId>
+                <s:configuration>
+                    <s:source>1.8</s:source>
+                    <s:target>1.8</s:target>
+                </s:configuration>
+            </s:plugin>
+            <s:plugin>
+                <s:groupId>org.apache.maven.plugins</s:groupId>
+                <s:artifactId>maven-compiler-plugin</s:artifactId>
+                <s:configuration>
+                    <s:source>7</s:source>
+                    <s:target>7</s:target>
+                </s:configuration>
+            </s:plugin>
+            <s:plugin>
+                <s:groupId>org.apache.maven.plugins</s:groupId>
+                <s:artifactId>maven-compiler-plugin</s:artifactId>
+                <s:configuration>
+                    <s:source>8</s:source>
+                    <s:target>8</s:target>
+                </s:configuration>
+            </s:plugin>
+        </s:plugins>
+    </s:build>
+    <s:properties>
+        <s:ignite.version>2.8.1</s:ignite.version>
+        <s:property name="marshaller">
+            <s:bean class="org.gridgain.grid.marshaller.binary.BinaryMarshaller">
+                ...
+                <s:property name="typeConfigurations">
+                    <s:list>
+                        <s:bean class="org.apache.ignite.binary.BinaryTypeConfiguration">
+                            <s:property name="className" value="org.apache.ignite.examples.client.binary.EmployeeKey"/>
+                            <s:property name="affinityKeyFieldName" value="organizationId"/>
+                        </s:bean>
+                    </s:list>
+                </s:property>
+                ...
+            </s:bean>
+        </s:property>
+        <!-- Explicit binary objects configuration. -->
+        <s:property name="marshaller">
+            <s:bean class="org.apache.ignite.marshaller.binary.BinaryMarshaller">
+                <s:property name="classNames">
+                    <s:list>
+                        <s:value>my.package.for.binary.objects.*</s:value>
+                        <s:value>org.apache.ignite.examples.client.binary.Employee</s:value>
+                    </s:list>
+                </s:property>
+            </s:bean>
+        </s:property>
+        <s:bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration"/>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.ignite</groupId>
-            <artifactId>ignite-core</artifactId>
-            <version>${ignite.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ignite</groupId>
-            <artifactId>ignite-spring</artifactId>
-            <version>${ignite.version}</version>
-        </dependency>
+        <s:property name="binaryConfiguration">
+            <s:bean class="org.apache.ignite.configuration.BinaryConfiguration">
+
+                <s:property name="nameMapper" ref="globalNameMapper"/>
+                <s:property name="idMapper" ref="globalIdMapper"/>
+
+                <s:property name="typeConfigurations">
+                    <s:list>
+                        <s:bean class="org.apache.ignite.binary.BinaryTypeConfiguration">
+                            <s:property name="typeName" value="org.apache.ignite.examples.*"/>
+                            <s:property name="serializer" ref="exampleSerializer"/>
+                        </s:bean>
+                    </s:list>
+                </s:property>
+            </s:bean>
+        </s:property>
+        <s:bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration"/>
+
+        <s:property name="binaryConfiguration">
+            <s:bean class="org.apache.ignite.configuration.BinaryConfiguration">
+
+                <s:property name="nameMapper" ref="globalNameMapper"/>
+                <s:property name="idMapper" ref="globalIdMapper"/>
+
+                <s:property name="typeConfigurations">
+                    <s:list>
+                        <s:bean class="org.apache.ignite.binary.BinaryTypeConfiguration">
+                            <s:property name="typeName" value="org.apache.ignite.examples.*"/>
+                            <s:property name="serializer" ref="exampleSerializer"/>
+                        </s:bean>
+                    </s:list>
+                </s:property>
+            </s:bean>
+        </s:property>
+
+
+    </s:properties>
+
+
+    <s:dependencies>
+        <s:dependency>
+            <s:groupId>org.apache.ignite</s:groupId>
+            <s:artifactId>ignite-core</s:artifactId>
+            <s:version>${ignite.version}</s:version>
+        </s:dependency>
+        <s:dependency>
+            <s:groupId>org.apache.ignite</s:groupId>
+            <s:artifactId>ignite-spring</s:artifactId>
+            <s:version>${ignite.version}</s:version>
+        </s:dependency>
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1</version>
-        </dependency>
+        <s:dependency>
+            <s:groupId>com.googlecode.json-simple</s:groupId>
+            <s:artifactId>json-simple</s:artifactId>
+            <s:version>1.1</s:version>
+        </s:dependency>
 
-    </dependencies>
+    </s:dependencies>
 
 
-</project>
+</s:project>

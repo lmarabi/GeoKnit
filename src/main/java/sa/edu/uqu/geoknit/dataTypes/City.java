@@ -1,6 +1,16 @@
 package sa.edu.uqu.geoknit.dataTypes;
 
-public class City extends  Point {
+import org.apache.ignite.binary.BinaryObjectException;
+import org.apache.ignite.binary.BinaryReader;
+import org.apache.ignite.binary.BinaryWriter;
+import org.apache.ignite.binary.Binarylizable;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+
+public class City extends  Point implements Runnable,Serializable ,Comparable<String> , Binarylizable {
+
+//    private static final long serialVersionUID = 91486038680078L;
 
     public Long city_id;
     public Long region_id;
@@ -11,7 +21,7 @@ public class City extends  Point {
 
     public City(){ }
 
-    public City(Long l){ this.region_id= l;}
+    public City(Long l,String s){ this.city_id= l ; this.name_en=s ;}
 
     public City(Long city_id, Long region_id, String name_ar, String name_en, Point center, Polygon boundariesP, String boundaries) {
         this.city_id = city_id;
@@ -123,15 +133,38 @@ public class City extends  Point {
         this.boundaries = boundaries;
     }
 
+
     @Override
     public String toString() {
         return "City{" +
                 "city_id=" + city_id +
-                ", region_id=" + region_id +
-                ", name_ar='" + name_ar + '\'' +
-                ", name_en='" + name_en + '\'' +
-                ", center=" + center.toString() +
-                ", boundaries=" + boundariesP.toString() +
+//                ", region_id=" + region_id +
+//                ", name_ar='" + name_ar + '\'' +
+//                ", name_en='" + name_en + '\'' +
+//                ", center=" + center.toString() +
+//                ", boundaries=" + boundariesP.toString() +
                 '}';
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public int compareTo(@NotNull String s) {
+        return 0;
+    }
+
+    @Override
+    public void writeBinary(BinaryWriter binaryWriter) throws BinaryObjectException {
+        binaryWriter.writeString("name_en", name_en);
+        binaryWriter.writeLong("city_id", city_id);
+    }
+
+    @Override
+    public void readBinary(BinaryReader binaryReader) throws BinaryObjectException {
+        name_en = binaryReader.readString("street");
+        city_id = binaryReader.readLong("zip");
     }
 }
