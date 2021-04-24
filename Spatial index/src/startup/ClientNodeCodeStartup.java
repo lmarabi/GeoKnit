@@ -39,7 +39,7 @@ public class ClientNodeCodeStartup {
      *
      */
 
-    static String path_worker;
+    static String path;
     static String path_out;
     static String knn_path;
     static int typeindex;
@@ -85,20 +85,22 @@ public class ClientNodeCodeStartup {
         System.out.println("Enter your index number : 1= quad tree, 2= GridFile, 3= Rtree ");
         typeindex = input.nextInt();
         System.out.println("Enter your path data file (.txt) to worker");
-        path_worker = input.next();
+        path = input.next();
         //path="C:\\green.txt";
         System.out.println("Please enter a path to save the file");
         path_out = input.next();
         //path_out="D:\\"+typeindex;
-        index(path_worker, path_out + path_worker + ".txt", typeindex ,1,2);
+        long start = System.currentTimeMillis();
+
+        index(path, path_out + path + ".txt", typeindex ,1,2);
         //index(path_worker, path_out + path_worker + ".txt", typeindex ,0,1);
         
         
         CacheInfo cacheInfo = new CacheInfo();
-        SetUp.loadFiles(ignite, path_out + path_worker + ".txt", 0, cacheInfo);
+        SetUp.loadFiles(ignite, path_out + path + ".txt", 0, cacheInfo);
         SetUp.createCachesFromFile(ignite, cacheInfo);
 
-        SetUp.loadFiles(ignite, path_worker, 1, cacheInfo);
+        SetUp.loadFiles(ignite, path, 1, cacheInfo);
         SetUp.insert(ignite, cacheInfo, 1,2,11,3);
         //SetUp.insert(ignite, cacheInfo,0,1,8,3);
         
@@ -108,13 +110,16 @@ public class ClientNodeCodeStartup {
         RangeQuery.rangeQuery(new Rectangle(16.90968448, 30.98333444, 38.02642785, 50.14039901), ignite, path_out + "Range_caches_worker.txt", path_out + "Range_points_worker.txt", cacheInfo);
        
         
-        
-        
-        KNNQuery.knnQuery( new Point(22.65798216,35.57980705),new Rectangle(16.90968448, 30.98333444, 38.02642785, 50.14039901),3, ignite, path_out + "knn.txt", cacheInfo);
+        KNNQuery.knnQuery(new Point(22.65798216,35.57980705),5,new Rectangle(16.90968448, 30.98333444, 38.02642785, 50.14039901),3, ignite, path_out + "knn.txt", cacheInfo);
 
         closeIgnite(ignite);
 
         input.close();
+         long end = System.nanoTime();
+         
+          long elapsedTime = end - start; 
+          
+          System.out.println("Time: " + elapsedTime);
     }
 
 }
