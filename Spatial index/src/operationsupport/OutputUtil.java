@@ -9,6 +9,9 @@ import org.apache.ignite.IgniteCache;
 
 import core.Point;
 import core.Rectangle;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import utility.PointDistancePair;
 
 public class OutputUtil {
@@ -65,19 +68,21 @@ public class OutputUtil {
     }
     
     
-      public static void GeoSpatial(Iterable<Point> pointw, Iterable<Point> pointst, String filePath) {
+       public static void knnquary(Iterable<String> results,String filePath, Point poi ,IgniteCache<String, Rectangle> cache,
+            Map<String, IgniteCache<Integer, ArrayList<Point>>> cacheMap) {
         try {
+
+                PriorityQueue <String> knn = new PriorityQueue<>();  
             OutputStreamWriter writer = new OutputStreamWriter(
                     new FileOutputStream(filePath, false), "UTF-8");
-            
-            int i = 0;
-            for (Point p : pointw) 
-                for (Point p1 : pointst) {
-                    if (p.day == p1.day && p.type_task == p1.type_task) {
-                        writer.write(i + " " + "worker---> " + p.toString() + "task---> " + p1.toString() + "\n");
-                        i++;
-                    }
-                }
+            //Rectangle rect = null;
+            for (String p : results) {
+                //rect = cache.get(p);
+                //IgniteCache<Integer, ArrayList<Point>> pcache = cacheMap.get(p);
+    
+                knn.add(p);
+          }
+            writer.write(knn.toString());
 
             writer.close();
         } catch (Exception e) {
